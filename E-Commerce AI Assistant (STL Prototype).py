@@ -1,5 +1,3 @@
-%%writefile 'AI E-commerce Assistant (SL) Prototype.py'
-
 import streamlit as st
 from google.colab import userdata
 from google import genai
