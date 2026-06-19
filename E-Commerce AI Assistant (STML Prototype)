@@ -1,0 +1,64 @@
+import ipywidgets as widgets
+from IPython.display import display
+from IPython.display import clear_output
+
+#1. FILTER DROPDOWN
+my_dropdown = widgets.Dropdown(options=[('value for money', 'vfm'), ('fast delivery', 'fd') ,('premium quality', 'premium')],
+description='Filter by:',)
+
+#2. SEARCH BAR
+user_input = widgets.Text(
+    placeholder="Let's find you a deal",
+    description="Searech for:")
+
+#3. ACTION BUTTON
+search_button = widgets.Button(
+    description="Search with AI filters", button_style="primary")
+
+# Define the output area
+output_area = widgets.Output()
+
+#4.THE LOGIC FUNCTION
+def execute_filtered_search(b):
+    with output_area:
+        clear_output(wait=True)
+
+
+
+        if not user_input.value.strip():
+            print("please type a product to sesrch for.")
+            return
+
+        print("Analysing...")
+
+        extra_parameters = ""
+
+        # CONDITIONAL STATEMENT
+        if my_dropdown.value == 'vfm':
+            extra_parameters = "budget friendly , positive reviews"
+        elif my_dropdown.value == 'fd':
+            extra_parameters = "next day delivery, fast, immediate next-day shipping"
+        elif my_dropdown.value == 'premium':
+            extra_parameters = "luxury, top-tier performance, five-stars reviews, premium build quality"
+
+
+
+        #CONSTRUCTING THE FINAL PROMPT
+        final_prompt = f"Act as a world expert shopping assistant. Search for {user_input.value} and filter the results to only include options that are {extra_parameters}. Present your reccomandations in a clean markdown table with colums for: Product Name, Price, Why It Fits, and Clickable Purchase Link. For each product recommended, include a brief 'Buying Advisory' sentence that builds a logical reason for fast action. Dynamically tie this urgency to the nature of {user_input.value} (e.g., mention high seasonal demand, fluctuating online price trends, or rapid stock turnover for top-rated items in this category). Remind the user that acting quickly ensures they secure the current pricing and immediate shipping availability"
+
+        try:
+        #SEND THE FINAL PROMPT TO GEMINI
+            response = client.models.generate_content(model='gemini-2.5-flash', contents=final_prompt)
+            clear_output(wait=True)
+            print(response.text)
+
+        except Exception as e:
+            clear_output(wait=True)
+            print(f"An error occurred: {e}")
+
+
+#LINK THE BUTTON TO THE FUNCTION
+search_button.on_click(execute_filtered_search)
+
+#INITIAL DISPLAY
+display(my_dropdown, user_input, search_button, output_area)
