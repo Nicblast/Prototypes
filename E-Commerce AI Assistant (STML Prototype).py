@@ -51,8 +51,7 @@ if st.button("Search with AI filters", type="primary"):
                 extra_parameters = "luxury, top-tier performance, five-stars reviews, premium build quality"
 
             # CONSTRUCTING THE FINAL PROMPT
-            
-final_prompt_complete = (
+            final_prompt_complete = (
     f"Act as a world expert shopping assistant. Search for {user_input_value_example} and "
     f"filter the results to only include options that are {extra_parameters_example}.\n\n"
     "CRITICAL LINK RULES:\n"
@@ -66,7 +65,8 @@ final_prompt_complete = (
     "5. Do not invent links; if a link is not directly found in the search tools, do not display it."
 )
 
-            try:
+           
+          try:
                 response = client.models.generate_content(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
                 st.markdown(response.text)
             except Exception as e:
