@@ -3,7 +3,7 @@ from google import genai
 
 st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
 st.title("AI E-commerce Assistant")
-st.write("Find the best deals with AI-powered filters!")
+st.write("Find the best deals with AI!")
 
 # Retrieve API Key via Streamlit Secrets for production
 try:
@@ -51,10 +51,10 @@ if st.button("Search with AI filters", type="primary"):
                 extra_parameters = "luxury, top-tier performance, five-stars reviews, premium build quality"
 
             # CONSTRUCTING THE FINAL PROMPT
-            final_prompt = f"Act as a world expert shopping assistant. Search for {user_input_value} and filter the results to only include options that are {extra_parameters}. Present your reccomandations in a clean markdown table with colums for: Product Name, Price, Why It Fits, and Clickable Purchase Link. For each product recommended, include a brief 'Buying Advisory' sentence that builds a logical reason for fast action. Dynamically tie this urgency to the nature of {user_input_value} (e.g., mention high seasonal demand, fluctuating online price trends, or rapid stock turnover for top-rated items in this category). Remind the user that acting quickly ensures they secure the current pricing and immediate shipping availability"
+            final_prompt = f"Act as a world expert shopping assistant. Search for {user_input_value} and filter the results to only include options that are {extra_parameters}.CRITICAL: You must use the live Google Search tool results to find these products. For every single product you recommend, look up its actual live URL from the search data and format it as a clickable Markdown hyperlink. DO NOT invent or guess any links." Present your reccomandations in a clean markdown table with colums for: Product Name, Price, Why It Fits, and Clickable Purchase Link. For each product recommended, include a brief 'Buying Advisory' sentence that builds a logical reason for fast action. Dynamically tie this urgency to the nature of {user_input_value} (e.g., mention high seasonal demand, fluctuating online price trends, or rapid stock turnover for top-rated items in this category). Remind the user that acting quickly ensures they secure the current pricing and immediate shipping availability"
 
             try:
-                response = client.models.generate_content(model='gemini-2.5-flash', contents=final_prompt)
+                response = client.models.generate_content(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
                 st.markdown(response.text)
             except Exception as e:
                 st.error(f"An error occurred: {e}")
