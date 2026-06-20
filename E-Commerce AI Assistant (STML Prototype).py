@@ -1,7 +1,7 @@
 import streamlit as st
 from google import genai
 
-st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
+st.set_page_config(page_title="Otis. Your AI E-commerce Assistant", layout="centered")
 st.title("AI E-commerce Assistant")
 st.write("Find the best deals with AI!")
 
