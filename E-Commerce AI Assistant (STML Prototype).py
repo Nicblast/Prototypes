@@ -51,17 +51,19 @@ if st.button("Search with AI filters", type="primary"):
                 extra_parameters = "luxury, top-tier performance, five-stars reviews, premium build quality"
 
             # CONSTRUCTING THE FINAL PROMPT
-            final_prompt = f"Act as a world expert shopping assistant. Search for {user_input_value} and filter the results to only include options that are {extra_parameters}. CRITICAL: You must use the live Google Search tool results to find these products. For every single product you recommend, look up its actual live URL from the search data and format it as a clickable Markdown hyperlink. DO NOT invent or guess any links. Present your reccomandations in a clean markdown table with colums for: Product Name, Price, Why It Fits, and Clickable Purchase Link. For each product recommended, include a brief 'Buying Advisory' sentence that builds a logical reason for fast action. Dynamically tie this urgency to the nature of {user_input_value} (e.g., mention high seasonal demand, fluctuating online price trends, or rapid stock turnover for top-rated items in this category). Remind the user that acting quickly ensures they secure the current pricing and immediate shipping availability."
-            "CRITICAL LINK RULES:\n"
-            "1. Use the live Google Search tool results to find actual active URLs for these products.\n"
-            "2. Format all product recommendations inside a clean Markdown table.\n"
-            "3. If a product link is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end of the URL.\n"
-            "4. For ANY OTHER store website (e.g., Walmart, eBay, etc.), you must wrap the URL in my universal affiliate redirect link. "
-            "To do this, take the real product URL you found and paste it directly onto the end of this base string: "
-            "https://pjatr.com/i/YOUR_NETWORK_ID/?url=\n"
-            "Example final format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=https://www.walmart.com/ip/12345)\n"
-            "5. Do not invent links; if a link is not directly found in the search tools, do not display it."
-        )
+            final_prompt_template = (
+    "Act as a world expert shopping assistant. Search for {user_input_value} and "
+    "filter the results to only include options that are {extra_parameters}.\n\n"
+    "CRITICAL LINK RULES:\n"
+    "1. Use the live Google Search tool results to find actual active URLs for these products.\n"
+    "2. Format all product recommendations inside a clean Markdown table.\n"
+    "3. If a product link is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end of the URL.\n"
+    "4. For ANY OTHER store website (e.g., Walmart, eBay, etc.), you must wrap the URL in my universal affiliate redirect link. "
+    "To do this, take the real product URL you found and paste it directly onto the end of this base string: "
+    "https://pjatr.com/i/YOUR_NETWORK_ID/?url=\n"
+    "Example final format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=https://www.walmart.com/ip/12345)\n"
+    "5. Do not invent links; if a link is not directly found in the search tools, do not display it."
+)
 
             try:
                 response = client.models.generate_content(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
