@@ -51,7 +51,7 @@ if st.button("Search with AI filters", type="primary"):
             elif selected_filter_value == 'premium':
                 extra_parameters = "luxury, top-tier performance, five-stars reviews, premium build quality"
             elif selected_filter_value == 'sms':
-                extra-parameters = "books, home-appliances, sportswear, tech , gadgets, value-for-money , franchise , marketplace, general"
+                extra_parameters = "books, home-appliances, sportswear, tech , gadgets, value-for-money , franchise , marketplace, general"
 
             # CONSTRUCTING THE FINAL PROMPT
             final_prompt = (f"Act as a world expert shopping assistant. Search for {user_input_value} and "
