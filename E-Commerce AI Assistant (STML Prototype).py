@@ -60,8 +60,8 @@ if st.button("Search with AI filters", type="primary"):
                 extra_parameters = "books, home-appliances, sportswear, tech , gadgets, value-for-money , franchise , marketplace, general"
 
         
-            # CONSTRUCTING THE FINAL PROMPT
-         final_prompt = (
+        # CONSTRUCTING THE FINAL PROMPT
+        final_prompt = (
             f"Act as a world expert shopping assistant. Search for '{user_input_value}' and "
             f"filter the results to only include options matching these traits: {extra_parameters}.\n\n"
             f"CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. "
