@@ -61,7 +61,7 @@ if st.button("Search with AI filters", type="primary"):
 
         
             # CONSTRUCTING THE FINAL PROMPT
-        final_prompt = (
+         final_prompt = (
             f"Act as a world expert shopping assistant. Search for '{user_input_value}' and "
             f"filter the results to only include options matching these traits: {extra_parameters}.\n\n"
             f"CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. "
@@ -78,9 +78,9 @@ if st.button("Search with AI filters", type="primary"):
         )
 
             
-        try:
+         try:
             response_stream = client.models.generate_content_stream(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
             st.write_stream(chunk.text for chunk in response_stream)
             
          except Exception as e:
-            st.error(f"An error occurred: {e}")
+             st.error(f"An error occurred: {e}")
