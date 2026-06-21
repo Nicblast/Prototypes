@@ -17,8 +17,8 @@ except Exception as e:
 filter_options = [
     ('value for money', 'vfm'),
     ('fast delivery', 'fd'),
-    ('premium quality', 'premium')
-    ('something more specific', 'sms')
+    ('premium quality', 'premium'),
+    ('something specific', 'sp')
 ]
 selected_filter_label = st.selectbox(
     "Filter by:",
