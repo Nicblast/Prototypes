@@ -35,6 +35,12 @@ user_input_value = st.text_input(
     placeholder="Let's find you a deal"
 )
 
+# LANGUAGE SELECTOR WITH CHINESE AND JAPANESE
+selected_language = st.selectbox(
+    "Choose Language / Scegli Lingua:",
+    ["English", "Italiano", "Español", "Français", "Deutsch", "简体中文 (Chinese)", "日本語 (Japanese)"]
+)
+
 # 3. ACTION BUTTON
 if st.button("Search with AI filters", type="primary"):
     if not user_input_value.strip():
@@ -54,15 +60,18 @@ if st.button("Search with AI filters", type="primary"):
                 extra_parameters = "books, home-appliances, sportswear, tech , gadgets, value-for-money , franchise , marketplace, general"
 
             # CONSTRUCTING THE FINAL PROMPT
-            final_prompt = (
+            # CONSTRUCTING THE FINAL PROMPT
+        final_prompt = (
             f"Act as a world expert shopping assistant. Search for '{user_input_value}' and "
             f"filter the results to only include options matching these traits: {extra_parameters}.\n\n"
+            f"CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. "
+            "Translate all table headers, product descriptions, and explanations into this language.\n\n"
             "CRITICAL LINK & IMAGE RULES:\n"
             "1. Use the live Google Search tool results to extract real, active purchase URLs.\n"
             "2. If an active product link is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end of the URL.\n"
             "3. For ANY OTHER store website, wrap the URL like this: https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL\n"
             "4. From the search results, find a valid image source URL (like a thumbnail) for each product.\n"
-            "5. Present your recommendations in a clean Markdown table with these columns: Product Name | Image | Price & Store | Why It Matches.\n"
+            "5. Present your recommendations in a clean Markdown table with these columns (translated to your output language): Product Name | Image | Price & Store | Why It Matches.\n"
             "6. Display the image inside the table using standard Markdown image syntax: ![Product Name](image_url_here)\n"
             "7. The Product Name column must be a working clickable Markdown link containing your modified affiliate URL.\n"
             "8. CRITICAL: Do not invent links or image URLs. If they are not directly found in the search tools, do not display them."
