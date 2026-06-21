@@ -78,7 +78,7 @@ if st.button("Search with AI filters", type="primary"):
         )
 
             
-            try:
+        try:
                 response_stream = client.models.generate_content_stream(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
                 st.write_stream(chunk.text for chunk in response_stream)
             
