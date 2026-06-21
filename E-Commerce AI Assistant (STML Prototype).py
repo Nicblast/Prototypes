@@ -58,16 +58,17 @@ if st.button("Search with AI filters", type="primary"):
     f"filter the results to only include options that are {extra_parameters}.\n\n"
     "CRITICAL LINK RULES:\n"
     "1. Use the live Google Search tool results to find actual active URLs for these products.\n"
-    "2. Format all product recommendations inside a clean Markdown table.\n"
+    "2. Format all product recommendations inside a clean Markdown table.\n"                        
     "3. If a product link is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end of the URL.\n"
     "4. For ANY OTHER store website (e.g., Walmart, eBay, etc.), you must wrap the URL in my universal affiliate redirect link. "
     "To do this, take the real product URL you found and paste it directly onto the end of this base string: "
     "https://pjatr.com/i/YOUR_NETWORK_ID/?url=\n"
     "Example final format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=https://www.walmart.com/ip/12345)\n"
-    "5. Do not invent links; if a link is not directly found in the search tools, do not display it."
+    "5. CRITICAL, DO NOT invent links; if a link is not directly found in the search tools, do not display it."
+    "6. Display a real image of the product with the link."
 )
 
-           
+            
             try:
                 response_stream = client.models.generate_content_stream(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
                 st.write_stream(chunk.text for chunk in response_stream)
