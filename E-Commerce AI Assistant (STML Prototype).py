@@ -67,7 +67,6 @@ if st.button("Search with AI filters", type="primary"):
             "7. The Product Name column must be a working clickable Markdown link containing your modified affiliate URL.\n"
             "8. CRITICAL: Do not invent links or image URLs. If they are not directly found in the search tools, do not display them."
         )
-)
 
             
             try:
