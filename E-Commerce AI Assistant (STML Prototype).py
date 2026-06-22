@@ -1,6 +1,12 @@
 import streamlit as st
 from google import genai
 
+col1, col2 = st.columns([1, 5])
+with col1:
+    st.image("assets/otis_logo.png", width=60) # Scaled beautifully next to text
+with col2:
+    st.title("Otis AI")
+
 st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
 st.title("Otis  -  Your AI E-commerce Assistant")
 st.write("Search with AI powered filters!")
@@ -37,7 +43,7 @@ user_input_value = st.text_input(
 
 # LANGUAGE SELECTOR WITH CHINESE AND JAPANESE
 selected_language = st.selectbox(
-    "Choose Language / Scegli Lingua:",
+    "Choose Language:",
     ["English", "Italiano", "Español", "Français", "Deutsch", "简体中文 (Chinese)", "日本語 (Japanese)"]
 )
 
