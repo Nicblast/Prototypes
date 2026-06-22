@@ -1,11 +1,14 @@
 import streamlit as st
 from google import genai
 
-col1, col2 = st.columns([1, 5])
+col1, col2 = st.columns([1, 6])
+
 with col1:
-    st.image("assets/otis_logo.png", width=60) # Scaled beautifully next to text
+    # Changed from otis_logo.png to otis_icon.png
+    st.image("assets/otis_icon.png", width=70) 
+
 with col2:
-    st.title("Otis AI")
+    st.title("Otis - Your AI E-commerce Assistant")
 
 st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
 st.title("Otis  -  Your AI E-commerce Assistant")
