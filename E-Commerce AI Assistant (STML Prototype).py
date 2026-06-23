@@ -5,7 +5,7 @@ col1, col2 = st.columns([1, 6])
 
 with col1:
     # Changed from otis_logo.png to otis_icon.png
-    st.image("assets/otis_icon.png", width=70) 
+    st.image("assets/Otis.ai.logo.png", width=70) 
 
 with col2:
     st.title("Otis - Your AI E-commerce Assistant")
