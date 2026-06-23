@@ -7,9 +7,6 @@ with col1:
     # Changed from otis_logo.png to otis_icon.png
     st.image("assets/Otis.ai.logo.png", width=70) 
 
-with col2:
-    st.title("Otis - Your AI E-commerce Assistant")
-
 st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
 st.title("Otis  -  Your AI E-commerce Assistant")
 st.write("Search with AI powered filters!")
