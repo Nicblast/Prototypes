@@ -3,14 +3,16 @@ from google import genai
 
 col1, col2 = st.columns([1, 6])
 
-with col1:
-    # Changed from otis_logo.png to otis_icon.png
-    st.image("Otis.ai.logo.png.png", width=70) 
+# vertical alignment
+col1, col2 = st.columns([1, 6], vertical_alignment="center")
 
-st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
-st.title("Otis AI")
-st.subheader("Your E-commerce Assistant")
-st.caption("Search with AI powered filters!")
+with col1:
+    st.image("https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png", width=70)
+
+with col2:
+    st.title("Otis AI")
+    st.markdown("**Your E-commerce Assistant**")
+    st.caption("Search with AI powered filters!")
 
 # Retrieve API Key via Streamlit Secrets for production
 try:
