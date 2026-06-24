@@ -9,8 +9,8 @@ with col1:
 
 st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
 st.title("Otis AI")
-st.subheader("Your E-commerge Assistant")
-st.subheader("Search with AI powered filters!")
+st.subheader("Your E-commerce Assistant")
+st.caption("Search with AI powered filters!")
 
 # Retrieve API Key via Streamlit Secrets for production
 try:
