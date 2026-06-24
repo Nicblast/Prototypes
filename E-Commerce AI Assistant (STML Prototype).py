@@ -8,8 +8,9 @@ with col1:
     st.image("Otis.ai.logo.png.png", width=70) 
 
 st.set_page_config(page_title="AI E-commerce Assistant", layout="centered")
-st.title("Otis AI -  Your E-commerce Assistant")
-st.write("Search with AI powered filters!")
+st.title("Otis AI")
+st.subheader("Your E-commerge Assistant")
+st.subheader("Search with AI powered filters!")
 
 # Retrieve API Key via Streamlit Secrets for production
 try:
