@@ -70,7 +70,7 @@ if st.button("Search with AI filters", type="primary"):
 
         
         # CONSTRUCTING THE FINAL PROMPT
-        final_prompt = 
+        final_prompt = (
            f"""Act as a world expert shopping assistant. Search for '{user_input_value}' and filter the results to only include options matching these traits: {extra_parameters}.
 
             CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. Translate all table headers, product descriptions, and explanations into this language.
@@ -93,7 +93,7 @@ if st.button("Search with AI filters", type="primary"):
             - If no direct image asset URL is found in the search text, you MUST use this exact placeholder link: https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png
 
             5. STRICT ENFORCEMENT: Do not invent or hallucinate any links. If a real purchase link cannot be found in the search tool, do not guess it. """
-          
+        )
 
             
         try:
