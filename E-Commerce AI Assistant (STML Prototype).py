@@ -70,21 +70,30 @@ if st.button("Search with AI filters", type="primary"):
 
         
         # CONSTRUCTING THE FINAL PROMPT
-        final_prompt = (
-            f"Act as a world expert shopping assistant. Search for '{user_input_value}' and "
-            f"filter the results to only include options matching these traits: {extra_parameters}.\n\n"
-            f"CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. "
-            "Translate all table headers, product descriptions, and explanations into this language.\n\n"
-            "CRITICAL FORMATTING & LINK RULES:\n"
-            "1. You MUST find real, active product purchase URLs using the live Google Search tool results.\n"
-            "2. Present your recommendations in a clean Markdown table with exactly four columns: Product Name | Image | Price & Store | Why It Matches\n"
-            "3. In the 'Product Name' column, create a working markdown link to buy the item. "
-            "If the URL is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end. "
-            "If it is ANY OTHER website, wrap the URL exactly like this: https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL\n"
-            "4. In the 'Image' column, provide the raw image URL found in the search results using syntax: ![Product](url). "
-            "CRITICAL: Never apply the pjatr or amazon affiliate structure to the Image URL. If no direct image URL is found in the search text, you MUST use this exact placeholder link: https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png\n"
-            "5. STRICT ENFORCEMENT: Do not invent or hallucinate any links. If a real purchase link cannot be found in the search tool, do not guess it."
-)
+        final_prompt = 
+        f"""Act as a world expert shopping assistant. Search for '{user_input_value}' and filter the results to only include options matching these traits: {extra_parameters}.
+
+CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. Translate all table headers, product descriptions, and explanations into this language.
+
+CRITICAL FORMATTING & LINK RULES:
+1. You MUST find real, active product purchase URLs using the live Google Search tool results.
+2. Present your recommendations in a clean Markdown table with exactly four columns: Product Name | Image | Price & Store | Why It Matches
+
+3. PRODUCT NAME COLUMN RULE:
+Inside the 'Product Name' column, create a clickable markdown link using the real store URL. 
+- If the URL is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end.
+- If the URL is from ANY OTHER website, wrap it exactly like this: https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL
+Example format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL)
+
+4. IMAGE COLUMN RULE:
+Inside the 'Image' column, provide the direct image asset URL found in the search results.
+- DO NOT wrap this image URL in the pjatr link structure.
+- DO NOT append any affiliate tags to this URL.
+- Use standard markdown image syntax: ![Product](image_url)
+- If no direct image asset URL is found in the search text, you MUST use this exact placeholder link: https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png
+
+5. STRICT ENFORCEMENT: Do not invent or hallucinate any links. If a real purchase link cannot be found in the search tool, do not guess it.
+"""
           
 
             
