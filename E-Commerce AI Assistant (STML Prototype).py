@@ -80,8 +80,8 @@ if st.button("Search with AI filters", type="primary"):
             st.error(f"An error occurred: {e}")
         
         final_prompt = (
-           f"Act as a world expert shopping assistant. Search for {user_input_value_example} and "
-           f"filter the results to only include options that are {extra_parameters_example}.\n\n"
+           f"Act as a world expert shopping assistant. Search for {user_input_value} and "
+           f"filter the results to only include options that are {extra_parameters}.\n\n"
            "CRITICAL LINK RULES:\n"
            "1. Use the live Google Search tool results to find actual active URLs for these products.\n"
            "2. Format all product recommendations inside a clean Markdown table.\n"
