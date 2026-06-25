@@ -75,16 +75,17 @@ if st.button("Search with AI filters", type="primary"):
             f"filter the results to only include options matching these traits: {extra_parameters}.\n\n"
             f"CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. "
             "Translate all table headers, product descriptions, and explanations into this language.\n\n"
-            "CRITICAL LINK & IMAGE RULES:\n"
-            "1. Use the live Google Search tool results to extract real, active purchase URLs.\n"
-            "2. If an active product link is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end of the URL.\n"
-            "3. For ANY OTHER store website, wrap the URL like this: https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL\n"
-            "4. From the search results, find a valid direct image source URL (ending in .jpg, .png, etc.) for each product.\n"
-            "5. Present your recommendations in a clean Markdown table with these columns (translated to your output language): Product Name | Image | Price & Store | Why It Matches\n"
-            "6. Display the image inside the table using standard Markdown image syntax: ![Product Name](image_url_here). CRITICAL: If a direct product image URL is not explicitly available in the search results, you MUST use this exact placeholder URL instead: https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png\n"
-            "7. The Product Name column must be a working clickable Markdown link containing your modified affiliate URL.\n"
-            "8. CRITICAL: Do not invent or guess image URLs. If a direct product image is missing from the search tool results, use the provided placeholder URL from Rule 6 without exception."
-        )
+            "CRITICAL FORMATTING & LINK RULES:\n"
+            "1. You MUST find real, active product purchase URLs using the live Google Search tool results.\n"
+            "2. Present your recommendations in a clean Markdown table with exactly four columns: Product Name | Image | Price & Store | Why It Matches\n"
+            "3. In the 'Product Name' column, create a working markdown link to buy the item. "
+            "If the URL is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end. "
+            "If it is ANY OTHER website, wrap the URL exactly like this: https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL\n"
+            "4. In the 'Image' column, provide the raw image URL found in the search results using syntax: ![Product](url). "
+            "CRITICAL: Never apply the pjatr or amazon affiliate structure to the Image URL. If no direct image URL is found in the search text, you MUST use this exact placeholder link: https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png\n"
+            "5. STRICT ENFORCEMENT: Do not invent or hallucinate any links. If a real purchase link cannot be found in the search tool, do not guess it."
+)
+          
 
             
         try:
