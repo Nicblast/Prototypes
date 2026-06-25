@@ -70,35 +70,27 @@ if st.button("Search with AI filters", type="primary"):
 
         
         # CONSTRUCTING THE FINAL PROMPT
-        final_prompt = (
-           f"""Act as a world expert shopping assistant. Search for '{user_input_value}' and filter the results to only include options matching these traits: {extra_parameters}.
-
-            CRITICAL OUTPUT RULE: You must respond entirely in the following language: {selected_language}. Translate all table headers, product descriptions, and explanations into this language.
-
-            CRITICAL FORMATTING & LINK RULES:
-            1. You MUST find real, active product purchase URLs using the live Google Search tool results.
-            2. Present your recommendations in a clean Markdown table with exactly four columns: Product Name | Image | Price & Store | Why It Matches
-
-            3. PRODUCT NAME COLUMN RULE:
-            Inside the 'Product Name' column, create a clickable markdown link using the real store URL. 
-            - If the URL is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end.
-            - If the URL is from ANY OTHER website, wrap it exactly like this: https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL
-            Example format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=REAL_URL)
-
-            4. IMAGE COLUMN RULE:
-            Inside the 'Image' column, provide the direct image asset URL found in the search results.
-            - DO NOT wrap this image URL in the pjatr link structure.
-            - DO NOT append any affiliate tags to this URL.
-            - Use standard markdown image syntax: ![Product](image_url)
-            - If no direct image asset URL is found in the search text, you MUST use this exact placeholder link: https://raw.githubusercontent.com/Nicblast/Prototypes/main/Otis.ai.logo.png
-
-            5. STRICT ENFORCEMENT: Do not invent or hallucinate any links. If a real purchase link cannot be found in the search tool, do not guess it. """
-        )
-
-            
+        final_prompt = m
+           
         try:
             response_stream = client.models.generate_content_stream(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
             st.write_stream(chunk.text for chunk in response_stream)
             
         except Exception as e:
             st.error(f"An error occurred: {e}")
+        
+        final_prompt = (
+           f"Act as a world expert shopping assistant. Search for {user_input_value_example} and "
+           f"filter the results to only include options that are {extra_parameters_example}.\n\n"
+           "CRITICAL LINK RULES:\n"
+           "1. Use the live Google Search tool results to find actual active URLs for these products.\n"
+           "2. Format all product recommendations inside a clean Markdown table.\n"
+           "3. If a product link is from Amazon, append '?tag=YOUR_AMAZON_TAG' to the end of the URL.\n"
+           "4. For ANY OTHER store website (e.g., Walmart, eBay, etc.), you must wrap the URL in my universal affiliate redirect link. "
+           "To do this, take the real product URL you found and paste it directly onto the end of this base string: "
+           "https://pjatr.com/i/YOUR_NETWORK_ID/?url=\n"
+           "Example final format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=https://www.walmart.com/ip/12345)\n"
+           "5. Do not invent links; if a link is not directly found in the search tools, do not display it."
+)
+
+print(final_prompt_complete)
