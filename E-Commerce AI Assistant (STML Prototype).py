@@ -69,16 +69,7 @@ if st.button("Search with AI filters", type="primary"):
                 extra_parameters = "books, home-appliances, sportswear, tech , gadgets, value-for-money , franchise , marketplace, general"
 
         
-        # CONSTRUCTING THE FINAL PROMPT
-        final_prompt = m
-           
-        try:
-            response_stream = client.models.generate_content_stream(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
-            st.write_stream(chunk.text for chunk in response_stream)
-            
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-        
+        # CONSTRUCTING THE FINAL PROMPT 
         final_prompt = (
            f"Act as a world expert shopping assistant. Search for {user_input_value} and "
            f"filter the results to only include options that are {extra_parameters}.\n\n"
@@ -92,5 +83,12 @@ if st.button("Search with AI filters", type="primary"):
            "Example final format: [Product Name](https://pjatr.com/i/YOUR_NETWORK_ID/?url=https://www.walmart.com/ip/12345)\n"
            "5. Do not invent links; if a link is not directly found in the search tools, do not display it."
 )
-
-print(final_prompt_complete)
+           
+        try:
+            response_stream = client.models.generate_content_stream(model='gemini-2.5-flash', contents=final_prompt, config={'tools' : [{'google_search' : {}}] } )
+            st.write_stream(chunk.text for chunk in response_stream)
+            
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+        
+    
